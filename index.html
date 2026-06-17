@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Om Patel – Aerospace Engineer</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{--bg:#0a0c12;--bg2:#111420;--bg3:#181c2e;--accent:#38bdf8;--accent2:#6366f1;--text:#e2e8f0;--muted:#94a3b8;--border:#1e2a3a;--card:#131825;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.7;}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,12,18,0.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);}
+  .nav-inner{max-width:1100px;margin:auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;height:60px;}
+  .nav-logo{font-size:1.1rem;font-weight:700;color:var(--accent);}
+  .nav-links{display:flex;gap:2rem;list-style:none;}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:.9rem;transition:color .2s;}
+  .nav-links a:hover{color:var(--accent);}
+  section{padding:5rem 2rem;}
+  .container{max-width:1100px;margin:auto;}
+  .section-label{font-size:.75rem;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:.5rem;}
+  .section-title{font-size:2rem;font-weight:700;margin-bottom:2.5rem;color:#fff;}
+
+  /* HERO */
+  #hero{min-height:100vh;display:flex;align-items:center;padding-top:80px;position:relative;overflow:hidden;}
+  .hero-tag{display:inline-block;background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.3);color:var(--accent);font-size:.8rem;padding:.3rem .8rem;border-radius:99px;margin-bottom:1.5rem;letter-spacing:.5px;}
+  .hero-name{font-size:3.8rem;font-weight:800;line-height:1.1;color:#fff;margin-bottom:1rem;}
+  .hero-sub{font-size:1rem;color:var(--muted);margin-bottom:1.2rem;max-width:580px;}
+  .hero-passions{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem;}
+  .passion-tag{background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25);color:#a5b4fc;font-size:.78rem;padding:.3rem .75rem;border-radius:99px;}
+  .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+  .btn{padding:.7rem 1.6rem;border-radius:8px;font-size:.9rem;font-weight:600;text-decoration:none;cursor:pointer;transition:all .2s;border:none;display:inline-block;}
+  .btn-primary{background:var(--accent);color:#0a0c12;}
+  .btn-primary:hover{background:#7dd3fc;}
+  .btn-outline{background:transparent;color:var(--accent);border:1px solid var(--accent);}
+  .btn-outline:hover{background:rgba(56,189,248,.1);}
+  .blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.12;pointer-events:none;z-index:0;}
+  .blob1{width:450px;height:450px;background:#38bdf8;top:-120px;right:-80px;}
+  .blob2{width:350px;height:350px;background:#6366f1;bottom:-60px;left:-80px;}
+
+  /* ABOUT */
+  #about{background:var(--bg2);}
+  .about-grid{display:grid;grid-template-columns:2fr 1fr;gap:4rem;align-items:start;}
+  .about-text p{color:var(--muted);margin-bottom:1.1rem;font-size:.95rem;text-align:justify;}
+  .about-highlights{display:flex;flex-direction:column;gap:1rem;}
+  .highlight-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem 1.25rem;}
+  .highlight-icon{font-size:1.3rem;margin-bottom:.3rem;}
+  .highlight-title{font-size:.85rem;font-weight:700;color:#fff;margin-bottom:.2rem;}
+  .highlight-desc{font-size:.8rem;color:var(--muted);}
+
+  /* EDUCATION */
+  .edu-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem 2rem;display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:start;}
+  .edu-icon{width:52px;height:52px;border-radius:10px;background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.2);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;}
+  .edu-degree{font-size:1.05rem;font-weight:700;color:#fff;}
+  .edu-school{font-size:.95rem;color:var(--accent);margin:.2rem 0;}
+  .edu-dates{font-size:.85rem;color:var(--muted);margin-bottom:1rem;}
+  .edu-courses-title{font-size:.75rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:.6rem;}
+  .edu-courses{display:flex;flex-wrap:wrap;gap:.5rem;}
+  .tag{background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25);color:#a5b4fc;font-size:.75rem;padding:.25rem .7rem;border-radius:99px;}
+
+  /* SKILLS */
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1.5rem;}
+  .skill-group{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;}
+  .skill-group-title{font-size:.75rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:1rem;}
+  .skill-item{display:flex;align-items:center;gap:.6rem;padding:.4rem 0;border-bottom:1px solid var(--border);font-size:.875rem;color:var(--text);}
+  .skill-item:last-child{border-bottom:none;}
+  .skill-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0;}
+
+  /* EXPERIENCE */
+  #experience{background:var(--bg2);}
+  .tl-item{display:grid;grid-template-columns:170px 1fr;gap:2rem;}
+  .tl-item:not(:last-child){margin-bottom:2.5rem;}
+  .tl-date{font-size:.83rem;color:var(--muted);padding-top:.3rem;text-align:right;line-height:1.5;}
+  .tl-body{padding-left:2rem;border-left:2px solid var(--border);position:relative;}
+  .tl-body::before{content:'';position:absolute;left:-6px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--accent);border:2px solid var(--bg2);}
+  .tl-role{font-size:1rem;font-weight:700;color:#fff;line-height:1.4;}
+  .tl-company{font-size:.88rem;color:var(--accent);margin:.25rem 0 .75rem;}
+  .tl-list{list-style:none;padding:0;}
+  .tl-list li{display:flex;align-items:flex-start;gap:.6rem;font-size:.875rem;color:var(--muted);margin-bottom:.55rem;line-height:1.65;}
+  .tl-list li::before{content:'▹';color:var(--accent);font-size:.85rem;flex-shrink:0;margin-top:.15rem;}
+
+  /* PROJECTS */
+  .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;}
+  .proj-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem 1.75rem;transition:border-color .2s,transform .2s;display:flex;flex-direction:column;}
+  .proj-card:hover{border-color:rgba(56,189,248,.4);transform:translateY(-3px);}
+  .proj-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.6rem;gap:.5rem;}
+  .proj-icon{font-size:1.5rem;flex-shrink:0;}
+  .proj-dates{font-size:.75rem;color:var(--muted);white-space:nowrap;}
+  .proj-title{font-size:.98rem;font-weight:700;color:#fff;margin-bottom:.5rem;}
+  .proj-list{list-style:none;padding:0;margin-bottom:1rem;flex:1;}
+  .proj-list li{display:flex;align-items:flex-start;gap:.6rem;font-size:.85rem;color:var(--muted);margin-bottom:.45rem;line-height:1.65;}
+  .proj-list li::before{content:'▹';color:var(--accent);font-size:.8rem;flex-shrink:0;margin-top:.18rem;}
+  .proj-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:auto;}
+  .ptag{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2);color:var(--accent);font-size:.72rem;padding:.2rem .6rem;border-radius:99px;}
+
+  /* CONTACT */
+  #contact{background:var(--bg2);}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+  .contact-text p{color:var(--muted);margin-bottom:1rem;text-align:justify;}
+  .contact-links{display:flex;flex-direction:column;gap:1rem;}
+  .contact-link{display:flex;align-items:center;gap:1rem;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem 1.25rem;text-decoration:none;transition:border-color .2s,transform .2s;}
+  .contact-link:hover{border-color:rgba(56,189,248,.4);transform:translateY(-2px);}
+  .cl-icon{width:40px;height:40px;border-radius:8px;background:rgba(56,189,248,.1);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+  .cl-label{font-size:.8rem;color:var(--muted);}
+  .cl-value{font-size:.9rem;color:#fff;font-weight:600;}
+  footer{text-align:center;padding:2rem;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border);}
+
+  @media(max-width:768px){
+    .about-grid,.contact-grid,.tl-item{grid-template-columns:1fr;}
+    .hero-name{font-size:2.6rem;}
+    .tl-date{text-align:left;}
+    .nav-links{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">OP // Portfolio</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="hero-tag">✈ Aerospace Engineering Graduate · Class of 2026</div>
+    <h1 class="hero-name">Om Patel</h1>
+    <p class="hero-sub">B.Eng. Aerospace Engineering: Space Systems Design · Carleton University · Ottawa, ON. Passionate about engineering systems that operate at the edge of what's possible.</p>
+    <div class="hero-passions">
+      <span class="passion-tag">⚙ CAD Modelling & Design</span>
+      <span class="passion-tag">📐 FEA & Structural Analysis</span>
+      <span class="passion-tag">🛰 Systems & Controls</span>
+      <span class="passion-tag">🔧 DFM/DFMA & Manufacturing</span>
+      <span class="passion-tag">🚀 Spacecraft & Propulsion</span>
+      <span class="passion-tag">🛩 Drone / UAV Systems</span>
+      <span class="passion-tag">💨 CFD & Compressible Flow</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#projects" class="btn btn-primary">View My Projects</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">Who I Am</div>
+    <h2 class="section-title">About Me</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm Om Patel, a recently graduated Aerospace Engineer from Carleton University (B.Eng. Aerospace Engineering: Space Systems Design, May 2026) with a strong foundation in mechanical design, CAD/CAM, structural analysis, and space systems engineering. I am driven by a passion for turning complex engineering challenges into precise, manufacturable solutions.</p>
+        <p>My technical strengths span multi-platform 3D CAD (CATIA V5, SolidWorks, Fusion 360, AutoCAD), finite element and computational fluid dynamics analysis (Ansys Workbench, CFX), and systems-level design for spacecraft and high-altitude platforms. I apply standards like GD&T (ASME Y14.5M) and DFM/DFMA principles throughout my design process to ensure parts are production-ready from day one. My project experience also includes topology optimization, physical structural load testing, and compressible nozzle flow analysis using both MATLAB analytical methods and 3D CFD.</p>
+        <p>I hold an RPAS Basic Operations Certificate from Transport Canada and bring hands-on experience in UAV assembly, integration, and pre/post-flight inspection. As an Undergraduate Research Assistant at Carleton, I developed MATLAB/Simulink simulation models for multi-intruder aviation scenarios, built automated data visualization tools, and co-developed a Near Mid-Air Collision (NMAC) detection algorithm — work that directly supports Canadian airspace safety.</p>
+        <p>I am actively seeking junior and entry-level opportunities in aerospace engineering, mechanical design, manufacturing, and drone/UAV systems across Canada. With hands-on technical depth across CAD, simulation, spacecraft design, propulsion, and controls, I am ready to contribute from day one and am fully open to relocation anywhere in Canada to grow with the right team.</p>
+      </div>
+      <div class="about-highlights">
+        <div class="highlight-card">
+          <div class="highlight-icon">🎓</div>
+          <div class="highlight-title">Carleton University Graduate</div>
+          <div class="highlight-desc">B.Eng. Aerospace: Space Systems Design · May 2026</div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon">🛩</div>
+          <div class="highlight-title">RPAS Certificate</div>
+          <div class="highlight-desc">Transport Canada Basic Operations certified pilot</div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon">🔬</div>
+          <div class="highlight-title">Research Experience</div>
+          <div class="highlight-desc">Undergraduate Research Assistant · Canadian Airspace Modelling</div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon">🌍</div>
+          <div class="highlight-title">Open to Relocation</div>
+          <div class="highlight-desc">Based in Ottawa, ON · Willing to relocate across Canada</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <div class="section-label">Academic Background</div>
+    <h2 class="section-title">Education</h2>
+    <div class="edu-card">
+      <div class="edu-icon">🎓</div>
+      <div>
+        <div class="edu-degree">Bachelor of Engineering – Aerospace Engineering: Space Systems Design</div>
+        <div class="edu-school">Carleton University, Ottawa, Ontario</div>
+        <div class="edu-dates">September 2021 – May 2026</div>
+        <div class="edu-courses-title">Relevant Coursework</div>
+        <div class="edu-courses">
+          <span class="tag">Orbital Mechanics</span>
+          <span class="tag">Spacecraft Design I & II</span>
+          <span class="tag">Spacecraft Attitude Dynamics & Control</span>
+          <span class="tag">Transatmospheric Spacecraft Propulsion</span>
+          <span class="tag">Aerospace Propulsion (Turbojet)</span>
+          <span class="tag">Heat Transfer for Aerospace</span>
+          <span class="tag">Aerospace Engineering Design</span>
+          <span class="tag">Aerospace Graphical Design (CAD)</span>
+          <span class="tag">Fluid Mechanics I & II</span>
+          <span class="tag">Thermodynamics & Heat Transfer</span>
+          <span class="tag">Engineering Dynamics</span>
+          <span class="tag">Feedback Control Systems</span>
+          <span class="tag">Mathematical Methods</span>
+          <span class="tag">CAD/CAM</span>
+          <span class="tag">Engineering Design Project</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label">Technical Toolkit</div>
+    <h2 class="section-title">Skills &amp; Tools</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">CAD / Engineering Software</div>
+        <div class="skill-item"><div class="skill-dot"></div>CATIA V5</div>
+        <div class="skill-item"><div class="skill-dot"></div>SolidWorks</div>
+        <div class="skill-item"><div class="skill-dot"></div>Autodesk Fusion 360</div>
+        <div class="skill-item"><div class="skill-dot"></div>AutoCAD / Inventor</div>
+        <div class="skill-item"><div class="skill-dot"></div>xFLR5</div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Analysis, Simulation & Programming</div>
+        <div class="skill-item"><div class="skill-dot"></div>Ansys Workbench (FEA/CFD)</div>
+        <div class="skill-item"><div class="skill-dot"></div>ANSYS CFX (Compressible Flow)</div>
+        <div class="skill-item"><div class="skill-dot"></div>MATLAB / Simulink</div>
+        <div class="skill-item"><div class="skill-dot"></div>Python</div>
+        <div class="skill-item"><div class="skill-dot"></div>Finite Element Analysis</div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Design & Manufacturing</div>
+        <div class="skill-item"><div class="skill-dot"></div>GD&T (ASME Y14.5M)</div>
+        <div class="skill-item"><div class="skill-dot"></div>Topology Optimization (TO)</div>
+        <div class="skill-item"><div class="skill-dot"></div>DFM / DFMA</div>
+        <div class="skill-item"><div class="skill-dot"></div>CNC Toolpath Programming</div>
+        <div class="skill-item"><div class="skill-dot"></div>Fixture & Tooling Design</div>
+        <div class="skill-item"><div class="skill-dot"></div>BOM & Document Control</div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">UAV, Certs & Other</div>
+        <div class="skill-item"><div class="skill-dot"></div>RPAS Certificate (Transport Canada)</div>
+        <div class="skill-item"><div class="skill-dot"></div>UAV Assembly & Integration</div>
+        <div class="skill-item"><div class="skill-dot"></div>Pre/Post-Flight Inspection</div>
+        <div class="skill-item"><div class="skill-dot"></div>Canadian Aviation Regulations (CAR)</div>
+        <div class="skill-item"><div class="skill-dot"></div>FAA Part 23/25 Knowledge</div>
+        <div class="skill-item"><div class="skill-dot"></div>Microsoft Office Suite</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label">Professional History</div>
+    <h2 class="section-title">Work Experience</h2>
+    <div>
+      <div class="tl-item">
+        <div class="tl-date">Sept 2025 –<br/>Apr 2026</div>
+        <div class="tl-body">
+          <div class="tl-role">Undergraduate Research Assistant – Canadian Airspace Modelling</div>
+          <div class="tl-company">Carleton University · Ottawa, ON</div>
+          <ul class="tl-list">
+            <li>Designed and validated simulation modules from first principles using MATLAB/Simulink to model sensor performance across multi-intruder aviation scenarios; prepared engineering documentation and detailed reports in alignment with applicable design standards.</li>
+            <li>Developed automated MATLAB data visualization and performance reporting, plotting Risk Ratio vs. Lookahead Time and EOIR parameter sweeps, supporting investigation findings and data-driven validation.</li>
+            <li>Collaborated to develop a Near Mid-Air Collision (NMAC) detection algorithm using aircraft trajectory datasets and tracking sensors; performed V&V of system performance against design specifications via Cartesian conversions and time-domain comparisons.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="background:var(--bg2);">
+  <div class="container">
+    <div class="section-label">What I've Built</div>
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+
+      <!-- 1. TURBOJET - NEW -->
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-icon">🔥</div>
+          <div class="proj-dates">Jan – Apr 2026</div>
+        </div>
+        <div class="proj-title">Turbojet Cycle & C-D Nozzle Flow Analysis</div>
+        <ul class="proj-list">
+          <li>Performed 6-station turbojet cycle analysis in MATLAB for three distinct flow regimes — perfectly expanded (design), overexpanded, and normal shock inside nozzle — varying compressor PR (4–5), TIT (1400–1700 K), and ambient conditions.</li>
+          <li>Set up and ran 3D inviscid CFD simulations in ANSYS CFX on a converging-diverging nozzle (L=1.5m, Ae/At=5.95) with appropriate total pressure/temperature inlet and static pressure outlet boundary conditions for each regime.</li>
+          <li>Compared quasi-1D MATLAB analytical predictions (pressure ratio Pb/Pc, Mach number profiles) against CFD centerline results; achieved good qualitative agreement for the design condition, with discrepancies in shock cases attributed to 3D radial flow effects and mesh resolution limits.</li>
+          <li>Identified that the perfectly expanded flow achieved Mach 3 at the nozzle exit and that shock location in the nozzle case was confirmed at approximately x = 0.97–0.98 m.</li>
+        </ul>
+        <div class="proj-tags">
+          <span class="ptag">ANSYS CFX</span><span class="ptag">MATLAB</span><span class="ptag">Compressible Flow</span><span class="ptag">Turbojet Cycle</span><span class="ptag">C-D Nozzle</span><span class="ptag">Shock Analysis</span>
+        </div>
+      </div>
+
+      <!-- 2. BIKE CRANK ARM - ENHANCED -->
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-icon">🔧</div>
+          <div class="proj-dates">Jan – Apr 2026</div>
+        </div>
+        <div class="proj-title">CAD/CAM Design & Manufacturing: Bike Crank Arm</div>
+        <ul class="proj-list">
+          <li>Designed an Al 6061-T6 bike crank arm in Fusion 360 using Topology Optimization (30% mass target on a 13"×2"×0.75" block) and FEM static stress analysis, reducing final mass from 205g to 149g while maintaining a minimum safety factor of 1.045 (max von Mises stress: 263 MPa vs 275 MPa yield).</li>
+          <li>Generated 11 CNC toolpaths (9 internal + 2 external setups) for a HAAS DM-1 machining center using 2.5" face mill, ½" and ¼" flat end mills with optimized feeds, speeds, and depth-of-cut; applied GD&T (ASME Y14.5) throughout fabrication-ready engineering drawings.</li>
+          <li>Physical load testing confirmed design integrity: arm held 130 lbf elastically and reached permanent deformation at 150 lbf (exceeding the 80 lbf minimum requirement).</li>
+          <li>Analyzed 10,000-unit mass production scalability, proposing design modifications (hollowed middle section, merged CNC setups, dedicated fixtures) to significantly reduce cycle time and operational cost at scale.</li>
+        </ul>
+        <div class="proj-tags">
+          <span class="ptag">Fusion 360</span><span class="ptag">Topology Optimization</span><span class="ptag">FEM/FEA</span><span class="ptag">CNC Toolpath</span><span class="ptag">GD&T</span><span class="ptag">HAAS DM-1</span><span class="ptag">DFM/DFMA</span>
+        </div>
+      </div>
+
+      <!-- 3. PROBA-2 CONTROL SYSTEM - ENHANCED -->
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-icon">🛰</div>
+          <div class="proj-dates">Sept – Dec 2025</div>
+        </div>
+        <div class="proj-title">PROBA-2 Spacecraft Attitude Dynamics & Control</div>
+        <ul class="proj-list">
+          <li>Built a full 7-subsystem MATLAB/Simulink architecture (ACT, DYN, SEN, CTL, GDC, ORB, TEX) for the PROBA-2 microsatellite, modeling reaction wheel actuators with nonlinear quaternion feedback control and implementing quaternion differential kinematics.</li>
+          <li>Developed two-body orbital propagation for a sun-synchronous orbit (T=6000s complete orbit) and modeled all four external perturbation torques: gravity gradient, aerodynamic drag, solar radiation pressure, and magnetic torque.</li>
+          <li>Implemented and compared four gain tuning methodologies (inverse inertia, scaled identity, eigenaxis alpha-beta, eigenaxis linear analysis), achieving closed-loop attitude stabilization within a 50-second settling time.</li>
+          <li>Validated full closed-loop simulation with CTL (nonlinear quaternion feedback) and GDC (error quaternion + angular rate computation) blocks, producing quaternion vs. time and qi vs. qj phase plots across all gain methods.</li>
+        </ul>
+        <div class="proj-tags">
+          <span class="ptag">MATLAB</span><span class="ptag">Simulink</span><span class="ptag">Attitude Control</span><span class="ptag">Quaternion Feedback</span><span class="ptag">Orbital Propagation</span><span class="ptag">Perturbation Torques</span>
+        </div>
+      </div>
+
+      <!-- 4. CFD LAMINAR PIPE FLOW - NEW -->
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-icon">💧</div>
+          <div class="proj-dates">Fall 2025</div>
+        </div>
+        <div class="proj-title">CFD Laminar Pipe Flow Simulation (ANSYS CFX)</div>
+        <ul class="proj-list">
+          <li>Modeled 3D circular laminar pipe flow (L=0.5m, D=12mm, air at 25°C, 1 atm) in ANSYS Workbench and CFX with uniform inlet velocity (0.4 m/s), zero-gauge outlet pressure, and no-slip wall conditions.</li>
+          <li>Validated pressure drop (simulated: 0.81 Pa vs analytical: 0.822 Pa, Re=307 laminar) and entrance length (simulated: 0.28m vs analytical: 0.22m), confirming correct laminar pipe flow simulation with under 2% pressure error.</li>
+          <li>Compared simulated parabolic axial velocity profile in the fully developed region against the theoretical solution U/Umax = 1 − (r/r₀)², achieving strong qualitative and quantitative agreement.</li>
+          <li>Conducted grid convergence study (2mm → 1mm mesh), demonstrating grid sensitivity with inlet pressure increasing from 0.81 Pa to 0.90 Pa and outlet velocity from 0.75 m/s to 0.765 m/s.</li>
+        </ul>
+        <div class="proj-tags">
+          <span class="ptag">ANSYS CFX</span><span class="ptag">Ansys Workbench</span><span class="ptag">CFD</span><span class="ptag">Laminar Flow</span><span class="ptag">Grid Convergence</span>
+        </div>
+      </div>
+
+      <!-- 5. CAPSTONE -->
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-icon">⚡</div>
+          <div class="proj-dates">Sept 2024 – Apr 2025</div>
+        </div>
+        <div class="proj-title">Capstone: Advanced Electric Aircraft — Power Systems Design</div>
+        <ul class="proj-list">
+          <li>Designed a 4 kW emergency avionics power backup using 84 LiFePO4 cells (7S12P, 24V nominal, 370 Ah, 8,889 Wh usable energy, 33.18 kg, 0.015 m³), fully validated for 2-hour continuous endurance with under 100 mV voltage overshoot during charge-to-discharge mode transitions.</li>
+          <li>Developed a PWM-controlled DC-DC boost converter (12V → 24V, 200W, 50 kHz) with a PI controller achieving critical damping and 85.25% conversion efficiency — outperforming the pulse generator baseline (82.6%) — validated through MATLAB/Simulink transient analysis comparing underdamped vs critically damped system response.</li>
+          <li>Engineered a complete BMS for the 84-cell Li-ion pack (7S12P) with an unscented Kalman filter for SOC/SOH estimation, passive cell balancing (SOC alignment within ±0.5% across all 12 parallel strings), and a CC-CV charging protocol to prevent overcharging and thermal runaway.</li>
+          <li>Designed a liquid-cooling thermal management system (ethylene glycol/water, parallel channel cooling plates) maintaining cell temperatures uniformly within 290K–310K; produced CATIA V5 CAD models of the full battery module assembly with integrated cooling plate geometry.</li>
+          <li>Documented comprehensive electrical and thermal system designs across three technical reports with CAD models, circuit diagrams, control logic, and scaling methodology; ensured compliance with Canadian Aviation Regulations (CAR) and aerospace electrical standards.</li>
+        </ul>
+        <div class="proj-tags">
+          <span class="ptag">CATIA V5</span><span class="ptag">MATLAB/Simulink</span><span class="ptag">BMS Design</span><span class="ptag">Kalman Filter</span><span class="ptag">DC-DC Converter</span><span class="ptag">Thermal Management</span><span class="ptag">CC-CV Control</span><span class="ptag">CAR Compliance</span>
+        </div>
+      </div>
+
+      <!-- 6. STRATOSPHERIC -->
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-icon">🚀</div>
+          <div class="proj-dates">Jan – Apr 2024</div>
+        </div>
+        <div class="proj-title">Stratospheric Payload Delivery Aircraft Design</div>
+        <ul class="proj-list">
+          <li>Designed a high-altitude solar radiation management aircraft achieving 106,477 lbs MTOW, 65,000 ft cruise, 30,000 lb payload capacity, and Mach 0.5–0.715 performance envelope; executed 1,000+ iteration mission weight-fraction analysis (Gudmundsson method) for both payload dispensing and ferry missions to converge on empty weight estimation.</li>
+          <li>Selected NACA 4418 airfoil via XFLR5 3D computational analysis, achieving (L/D)max of 31.01; performed full constraint analysis across takeoff, landing, climb, and cruise regimes, establishing optimal wing loading W/S = 44 lb/ft² and thrust-to-weight T/W = 0.26.</li>
+          <li>Conducted sensitivity analysis across SFC, L/D, empty weight, payload, and range, quantifying design trade-offs; produced detailed CATIA V5 CAD models and 3-view engineering drawings with structural V-n diagram analysis compliant with FAA Part 23/25 regulations.</li>
+          <li>Performed program cost analysis: target unit price $6.85M (with quantity discount factor), 122–195 aircraft break-even point, and $8.72M estimated annual operational cost — supporting business case justification for the stratospheric mission.</li>
+        </ul>
+        <div class="proj-tags">
+          <span class="ptag">CATIA V5</span><span class="ptag">xFLR5</span><span class="ptag">Constraint Analysis</span><span class="ptag">FAA Part 23/25</span><span class="ptag">NACA 4418</span><span class="ptag">Mission Weight Fractions</span><span class="ptag">Cost Analysis</span>
+        </div>
+      </div>
+
+      <!-- 7. PROBA-2 ORBITAL -->
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-icon">🔭</div>
+          <div class="proj-dates">Sept – Dec 2023</div>
+        </div>
+        <div class="proj-title">PROBA-2 Orbital Mechanics & Dynamics Simulation</div>
+        <ul class="proj-list">
+          <li>Modeled PROBA-2 satellite orbit (a = 7,091.5 km, e = 0.0015, i = 98.2°) in Earth-centered inertial (ECI) frame using MATLAB, computing full perifocal ↔ ECI rotation matrices, eccentric/true anomaly relationships, and multi-step orbital state propagation with numerical ODE integration.</li>
+          <li>Simulated two-body dynamics under J2 gravitational perturbation (J2 = 1.08204 × 10⁻³), demonstrating secular RAAN drift: +0.001851 rad/orbit at i = 98.2° (sun-synchronous) and −0.00812 rad/orbit at i = 10°, confirming oblateness-induced orbital mechanics coupling.</li>
+          <li>Validated simulation against the vis-viva equation at t = 30, 60, and 90 min intervals, achieving less than 0.1% velocity error across all test points; verified energy conservation through orbital speed variation analysis (7.47–7.51 km/s across orbit).</li>
+          <li>Generated ground track analysis by converting ECI position vectors to geodetic coordinates (latitude/longitude) for mission coverage assessment; produced 3D orbit visualizations in both perifocal and ECI frames with component-wise position/velocity time histories.</li>
+        </ul>
+        <div class="proj-tags">
+          <span class="ptag">MATLAB</span><span class="ptag">Simulink</span><span class="ptag">Orbital Mechanics</span><span class="ptag">J2 Perturbation</span><span class="ptag">ECI Frame</span><span class="ptag">Ground Track</span><span class="ptag">Astrodynamics</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-grid">
+      <div class="contact-text">
+        <p>I'm actively seeking junior and entry-level opportunities in <strong style="color:#fff;">aerospace engineering, mechanical design, manufacturing, and drone/UAV systems</strong> across Canada. Whether you're hiring for a hands-on role or an exciting project — let's connect.</p>
+        <p>Based in Ottawa, ON · <span style="color:var(--accent);">Open to relocation anywhere in Canada.</span></p>
+      </div>
+      <div class="contact-links">
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=omnpatel1513@gmail.com" target="_blank" class="contact-link">
+          <div class="cl-icon">✉️</div>
+          <div><div class="cl-label">Email</div><div class="cl-value">omnpatel1513@gmail.com</div></div>
+        </a>
+        <a href="https://linkedin.com/in/ompatel09" target="_blank" class="contact-link">
+          <div class="cl-icon">💼</div>
+          <div><div class="cl-label">LinkedIn</div><div class="cl-value">linkedin.com/in/ompatel09</div></div>
+        </a>
+        <a href="tel:6132763792" class="contact-link">
+          <div class="cl-icon">📞</div>
+          <div><div class="cl-label">Phone</div><div class="cl-value">613-276-3792</div></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Om Patel · B.Eng. Aerospace Engineering: Space Systems Design · Carleton University · 2026</p>
+</footer>
+
+</body>
+</html>
